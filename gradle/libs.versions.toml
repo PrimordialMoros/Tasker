@@ -1,0 +1,25 @@
+[versions]
+junit = "5.8.2"
+paper-minecraft = "1.18.2-R0.1-SNAPSHOT"
+minecraft = "1.18.2"
+fabric-loom = "1.0-SNAPSHOT"
+fabric-api = "0.67.0+1.18.2"
+fabric-loader = "0.14.11"
+sponge = "8.0.0"
+
+[libraries]
+junit-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit" }
+junit-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit" }
+paper = { module = "io.papermc.paper:paper-api", version.ref = "paper-minecraft" }
+fabric-minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
+fabric-api = { module = "net.fabricmc.fabric-api:fabric-api", version.ref = "fabric-api" }
+fabric-loader = { module = "net.fabricmc:fabric-loader", version.ref = "fabric-loader" }
+sponge-api = { module = "org.spongepowered:spongeapi", version.ref = "sponge" }
+minestom-api = { module = "com.github.Minestom.Minestom:Minestom", version = "809d9516b2" }
+
+[plugins]
+fabric-loom = { id = "fabric-loom", version = "1.0-SNAPSHOT" }
+checker = { id = "org.checkerframework", version = "0.6.21" }
+
+[bundles]
+junit = ["junit-api", "junit-engine"]
