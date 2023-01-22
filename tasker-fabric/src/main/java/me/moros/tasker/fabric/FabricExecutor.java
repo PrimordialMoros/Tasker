@@ -19,8 +19,6 @@
 
 package me.moros.tasker.fabric;
 
-import java.util.Objects;
-
 import me.moros.tasker.executor.AbstractSyncExecutor;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.server.MinecraftServer;
@@ -29,10 +27,9 @@ import net.minecraft.server.MinecraftServer;
  * Synchronous executor for Fabric.
  */
 public class FabricExecutor extends AbstractSyncExecutor {
-  private MinecraftServer server;
+  private boolean stopped;
 
-  public FabricExecutor(MinecraftServer server) {
-    this.server = Objects.requireNonNull(server);
+  public FabricExecutor() {
     ServerTickEvents.START_SERVER_TICK.register(this::tick);
   }
 
@@ -41,14 +38,15 @@ public class FabricExecutor extends AbstractSyncExecutor {
       wheel.advance();
     }
   }
+
   @Override
   public boolean isValid() {
-    return server != null && server.isRunning();
+    return !stopped;
   }
 
   @Override
   public void shutdown() {
     super.shutdown();
-    server = null;
+    stopped = true;
   }
 }
