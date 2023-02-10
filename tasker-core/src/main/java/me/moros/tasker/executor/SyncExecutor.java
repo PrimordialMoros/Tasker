@@ -94,6 +94,11 @@ public interface SyncExecutor extends TaskExecutor {
    */
   Task repeat(Consumer<? super Task> task, int ticks, int periodTicks);
 
+  /**
+   * Clear all scheduled tasks in this executor without shutting down.
+   */
+  void clear();
+
   private Consumer<? super Task> toConsumer(Runnable task) {
     Objects.requireNonNull(task);
     return t -> task.run();

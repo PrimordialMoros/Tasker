@@ -26,6 +26,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.RunnableFuture;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 
@@ -40,6 +41,9 @@ public class SimpleAsyncExecutor implements AsyncExecutor {
 
   public SimpleAsyncExecutor(ScheduledExecutorService delegate) {
     this.delegate = Objects.requireNonNull(delegate);
+    if (this.delegate instanceof ScheduledThreadPoolExecutor ex) {
+      ex.setRemoveOnCancelPolicy(true);
+    }
   }
 
   public SimpleAsyncExecutor() {

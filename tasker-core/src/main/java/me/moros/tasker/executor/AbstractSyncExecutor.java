@@ -60,8 +60,13 @@ public abstract class AbstractSyncExecutor implements SyncExecutor {
   }
 
   @Override
-  public void shutdown() {
+  public final void clear() {
     wheel.shutdown(false);
+  }
+
+  @Override
+  public void shutdown() {
+    clear();
   }
 
   protected void checkValid() {

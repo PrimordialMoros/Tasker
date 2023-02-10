@@ -2,9 +2,9 @@
 junit = "5.8.2"
 paper-minecraft = "1.18.2-R0.1-SNAPSHOT"
 minecraft = "1.19.3"
-fabric-loom = "1.0-SNAPSHOT"
-fabric-api = "0.72.0+1.19.3"
-fabric-loader = "0.14.12"
+fabric-loom = "1.1-SNAPSHOT"
+fabric-api = "0.73.2+1.19.3"
+fabric-loader = "0.14.14"
 sponge = "10.0.0-SNAPSHOT"
 
 [libraries]
@@ -15,11 +15,11 @@ fabric-minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" 
 fabric-api = { module = "net.fabricmc.fabric-api:fabric-api", version.ref = "fabric-api" }
 fabric-loader = { module = "net.fabricmc:fabric-loader", version.ref = "fabric-loader" }
 sponge-api = { module = "org.spongepowered:spongeapi", version.ref = "sponge" }
-minestom-api = { module = "com.github.Minestom.Minestom:Minestom", version = "809d9516b2" }
+minestom-api = { module = "com.github.Minestom.Minestom:Minestom", version = "aebf72de90" }
 
 [plugins]
-fabric-loom = { id = "fabric-loom", version = "1.0-SNAPSHOT" }
-checker = { id = "org.checkerframework", version = "0.6.21" }
+fabric-loom = { id = "fabric-loom", version.ref = "fabric-loom" }
+checker = { id = "org.checkerframework", version = "0.6.23" }
 
 [bundles]
 junit = ["junit-api", "junit-engine"]
