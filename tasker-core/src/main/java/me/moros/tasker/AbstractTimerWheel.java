@@ -31,7 +31,8 @@ abstract class AbstractTimerWheel implements TimerWheel {
     ++currentTick;
   }
 
-  protected int currentTick() {
+  @Override
+  public int currentTick() {
     return currentTick;
   }
 

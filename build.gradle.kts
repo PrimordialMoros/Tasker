@@ -7,7 +7,7 @@ plugins {
 
 allprojects {
     group = "me.moros"
-    version = "1.0.0-SNAPSHOT"
+    version = "1.0.0"
 
     apply(plugin = "java-library")
     apply(plugin = "org.checkerframework")
@@ -25,9 +25,13 @@ allprojects {
             options.compilerArgs.addAll(listOf("-Xlint:unchecked", "-Xlint:deprecation"))
             options.encoding = "UTF-8"
         }
+        withType<AbstractArchiveTask> {
+            isPreserveFileTimestamps = false
+            isReproducibleFileOrder = true
+        }
         named<Copy>("processResources") {
             from("$rootDir/LICENSE") {
-                rename { "${rootProject.name.toUpperCase()}_${it}" }
+                rename { "${rootProject.name.uppercase()}_${it}" }
             }
         }
     }

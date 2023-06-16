@@ -4,5 +4,5 @@ repositories {
 
 dependencies {
     api(project(":tasker-core"))
-    compileOnly(libs.paper)
+    compileOnly(libs.paper.api)
 }

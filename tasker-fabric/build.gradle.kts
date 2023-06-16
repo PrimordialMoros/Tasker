@@ -2,8 +2,6 @@ plugins {
     alias(libs.plugins.fabric.loom)
 }
 
-version = "${libs.versions.minecraft.get()}-${rootProject.version}"
-
 repositories {
     maven("https://maven.fabricmc.net/")
 }

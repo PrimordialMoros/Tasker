@@ -74,6 +74,12 @@ public interface TimerWheel {
   void shutdown(boolean run);
 
   /**
+   * Get the current tick tracked by the wheel.
+   * @return the current tick
+   */
+  int currentTick();
+
+  /**
    * Create a hierarchical timer wheel suited for variable expiration.
    * @return the timer wheel instance
    */
