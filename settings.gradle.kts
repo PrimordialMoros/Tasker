@@ -8,6 +8,7 @@ pluginManagement {
 rootProject.name = "tasker"
 include("tasker-core")
 include("tasker-bukkit")
+include("tasker-paper")
 include("tasker-sponge")
 include("tasker-fabric")
 include("tasker-minestom")
