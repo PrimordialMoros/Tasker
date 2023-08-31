@@ -39,19 +39,19 @@ public abstract class Expiring implements Task, Comparable<Expiring> {
     prev = next = null;
   }
 
-  @Nullable Expiring previous() {
+  final @Nullable Expiring previous() {
     return prev;
   }
 
-  void previous(@Nullable Expiring prev) {
+  final void previous(@Nullable Expiring prev) {
     this.prev = prev;
   }
 
-  @Nullable Expiring next() {
+  final @Nullable Expiring next() {
     return next;
   }
 
-  void next(@Nullable Expiring next) {
+  final void next(@Nullable Expiring next) {
     this.next = next;
   }
 
@@ -59,21 +59,21 @@ public abstract class Expiring implements Task, Comparable<Expiring> {
     return expiringTick;
   }
 
-  void unlink() {
-    synchronized (this) {
-      if (parent != null) {
-        parent.unlink(this);
-      }
+  final void unlink() {
+    if (parent != null) {
+      parent.unlink(this);
     }
   }
 
   @Override
   public final void cancel() {
-    unlink();
+    synchronized (this) {
+      unlink();
+    }
   }
 
   @Override
-  public int compareTo(Expiring o) {
+  public final int compareTo(Expiring o) {
     return COMPARATOR.compare(this, o);
   }
 }

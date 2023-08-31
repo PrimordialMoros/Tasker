@@ -7,7 +7,7 @@ plugins {
 
 allprojects {
     group = "me.moros"
-    version = "1.0.0"
+    version = "1.0.1"
 
     apply(plugin = "java-library")
     apply(plugin = "org.checkerframework")

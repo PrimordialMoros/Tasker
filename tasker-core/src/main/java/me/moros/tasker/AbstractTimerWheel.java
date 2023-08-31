@@ -21,32 +21,48 @@ package me.moros.tasker;
 
 import java.util.Objects;
 
-abstract class AbstractTimerWheel implements TimerWheel {
+sealed abstract class AbstractTimerWheel implements TimerWheel permits SimpleTimerWheel, HierarchicalTimerWheel {
   private int currentTick;
 
   protected AbstractTimerWheel() {
   }
 
-  protected void incrementTick() {
+  @Override
+  public final int currentTick() {
+    return currentTick;
+  }
+
+  protected final void incrementTick() {
     ++currentTick;
   }
 
   @Override
-  public int currentTick() {
-    return currentTick;
+  public final void advance() {
+    synchronized (this) {
+      advanceSync();
+    }
   }
 
   @Override
-  public <T extends Expiring> T schedule(T task, int delay) {
+  public final void shutdown(boolean run) {
+    synchronized (this) {
+      shutdownSync(run);
+    }
+  }
+
+  @Override
+  public final <T extends Expiring> T schedule(T task, int delay) {
     Objects.requireNonNull(task);
     if (task.repeat() < 0 || delay < 0) {
       throw new IllegalArgumentException();
     }
-    reschedule(task, delay);
+    synchronized (this) {
+      reschedule(task, delay);
+    }
     return task;
   }
 
-  protected void reschedule(Expiring node, int ticks) {
+  protected final void reschedule(Expiring node, int ticks) {
     TaskList tasks = findBucket(ticks);
     node.unlink();
     node.parent = tasks;
@@ -54,7 +70,7 @@ abstract class AbstractTimerWheel implements TimerWheel {
     tasks.add(node);
   }
 
-  protected void expire(TaskList tasks) {
+  protected final void expire(TaskList tasks) {
     Expiring node = tasks.unlinkFirst();
     while (node != null) {
       node.run();
@@ -65,6 +81,10 @@ abstract class AbstractTimerWheel implements TimerWheel {
       node = tasks.unlinkFirst();
     }
   }
+
+  protected abstract void advanceSync();
+
+  protected abstract void shutdownSync(boolean run);
 
   protected abstract TaskList findBucket(int ticks);
 }

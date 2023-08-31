@@ -48,7 +48,7 @@ final class HierarchicalTimerWheel extends AbstractTimerWheel {
   }
 
   @Override
-  public synchronized void advance() {
+  protected void advanceSync() {
     incrementTick();
     for (int i = 0; i < length; i++) {
       boolean cascade = increment(i);
@@ -61,14 +61,12 @@ final class HierarchicalTimerWheel extends AbstractTimerWheel {
   }
 
   @Override
-  public void shutdown(boolean run) {
-    synchronized (this) {
-      Consumer<? super Expiring> action = run ? Expiring::run : Function.identity()::apply;
-      pending.clear(action);
-      for (int i = 0; i < length; i++) {
-        for (TaskList tasks : wheel[i]) {
-          tasks.clear(action);
-        }
+  protected void shutdownSync(boolean run) {
+    Consumer<? super Expiring> action = run ? Expiring::run : Function.identity()::apply;
+    pending.clear(action);
+    for (int i = 0; i < length; i++) {
+      for (TaskList tasks : wheel[i]) {
+        tasks.clear(action);
       }
     }
   }

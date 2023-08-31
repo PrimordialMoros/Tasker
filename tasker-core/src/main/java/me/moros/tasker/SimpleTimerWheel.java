@@ -36,19 +36,17 @@ final class SimpleTimerWheel extends AbstractTimerWheel {
   }
 
   @Override
-  public synchronized void advance() {
+  protected void advanceSync() {
     incrementTick();
     expire(wheel[index]);
     index = (index + 1) % wheel.length;
   }
 
   @Override
-  public void shutdown(boolean run) {
-    synchronized (this) {
-      Consumer<? super Expiring> action = run ? Expiring::run : Function.identity()::apply;
-      for (TaskList tasks : wheel) {
-        tasks.clear(action);
-      }
+  protected void shutdownSync(boolean run) {
+    Consumer<? super Expiring> action = run ? Expiring::run : Function.identity()::apply;
+    for (TaskList tasks : wheel) {
+      tasks.clear(action);
     }
   }
 

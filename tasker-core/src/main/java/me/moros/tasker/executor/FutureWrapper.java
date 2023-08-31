@@ -19,7 +19,6 @@
 
 package me.moros.tasker.executor;
 
-import java.util.Objects;
 import java.util.concurrent.RunnableFuture;
 
 import me.moros.tasker.Task;
@@ -29,7 +28,7 @@ final class FutureWrapper implements Task {
   private final int repeat;
 
   FutureWrapper(RunnableFuture<?> future, int repeat) {
-    this.future = Objects.requireNonNull(future);
+    this.future = future;
     this.repeat = repeat;
   }
 

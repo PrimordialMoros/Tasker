@@ -38,6 +38,12 @@ import java.util.function.Consumer;
  */
 public interface TimerWheel {
   /**
+   * Get the current tick tracked by the wheel.
+   * @return the current tick
+   */
+  int currentTick();
+
+  /**
    * Advance this wheel by a single tick, performing all necessary bookkeeping
    * and removing or rescheduling any expired tasks.
    */
@@ -72,12 +78,6 @@ public interface TimerWheel {
    * @param run whether to run each expiring task when cleared
    */
   void shutdown(boolean run);
-
-  /**
-   * Get the current tick tracked by the wheel.
-   * @return the current tick
-   */
-  int currentTick();
 
   /**
    * Create a hierarchical timer wheel suited for variable expiration.

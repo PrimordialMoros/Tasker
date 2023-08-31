@@ -52,6 +52,7 @@ public class SimpleAsyncExecutor implements AsyncExecutor {
 
   @Override
   public <V> CompletableFuture<@PolyNull V> submit(Supplier<@PolyNull V> task, long delay, TimeUnit unit) {
+    Objects.requireNonNull(task);
     checkValid();
     Executor ex = delay <= 0 ? delegate : CompletableFuture.delayedExecutor(delay, unit, delegate);
     return CompletableFuture.supplyAsync(task, ex);
@@ -59,6 +60,7 @@ public class SimpleAsyncExecutor implements AsyncExecutor {
 
   @Override
   public Task repeat(Runnable task, long delay, long period, TimeUnit unit) {
+    Objects.requireNonNull(task);
     checkValid();
     int periodTicks = toTicks(period, unit);
     var future = (RunnableFuture<?>) delegate.scheduleAtFixedRate(task, delay, period, unit);

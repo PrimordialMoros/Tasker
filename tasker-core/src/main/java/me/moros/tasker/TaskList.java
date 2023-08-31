@@ -21,16 +21,17 @@ package me.moros.tasker;
 
 import java.util.function.Consumer;
 
+import me.moros.tasker.TaskList.PendingTaskList;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
-class TaskList {
+sealed class TaskList permits PendingTaskList {
   private Expiring first;
   private Expiring last;
 
   TaskList() {
   }
 
-  @Nullable Expiring unlinkFirst() {
+  final @Nullable Expiring unlinkFirst() {
     final Expiring toRemove = first;
     if (toRemove != null) {
       final Expiring next = toRemove.next();
@@ -46,7 +47,7 @@ class TaskList {
     return toRemove;
   }
 
-  void unlink(Expiring node) {
+  final void unlink(Expiring node) {
     final Expiring next = node.next();
     final Expiring prev = node.previous();
     if (prev == null) {
@@ -64,7 +65,7 @@ class TaskList {
     node.parent = null;
   }
 
-  @Nullable Expiring first() {
+  final @Nullable Expiring first() {
     return first;
   }
 
@@ -81,7 +82,7 @@ class TaskList {
     linkLast(node);
   }
 
-  void linkBefore(Expiring node, Expiring next) {
+  final void linkBefore(Expiring node, Expiring next) {
     final Expiring prev = next.previous();
     node.previous(prev);
     node.next(next);
@@ -93,7 +94,7 @@ class TaskList {
     }
   }
 
-  void linkLast(Expiring node) {
+  final void linkLast(Expiring node) {
     final Expiring oldLast = last;
     node.previous(oldLast);
     node.next(null);
@@ -105,7 +106,7 @@ class TaskList {
     }
   }
 
-  void clear(Consumer<? super Expiring> action) {
+  final void clear(Consumer<? super Expiring> action) {
     // Clearing all the links between nodes is "unnecessary", but:
     // - helps a generational GC if the discarded nodes inhabit more than one generation
     // - is sure to free memory even if there is a reachable Iterator
