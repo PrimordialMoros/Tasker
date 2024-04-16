@@ -1,7 +1,7 @@
 # Tasker
 
 [![License](https://img.shields.io/github/license/PrimordialMoros/Tasker?color=blue&style=flat-square)](LICENSE)
-[![Maven Central](https://img.shields.io/maven-central/v/me.moros/tasker?style=flat-square)](https://search.maven.org/artifact/me.moros/tasker-core)
+[![Maven Central](https://img.shields.io/maven-central/v/me.moros/tasker-core?style=flat-square)](https://search.maven.org/artifact/me.moros/tasker-core)
 [![Javadoc](https://javadoc.io/badge2/me.moros/tasker/javadoc.svg?style=flat-square)](https://javadoc.io/doc/me.moros/tasker-core)
 
 ## Building
