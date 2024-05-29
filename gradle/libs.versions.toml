@@ -1,13 +1,13 @@
 [versions]
 junit = "5.10.2"
-paper-api = "1.20.4-R0.1-SNAPSHOT"
-minecraft = "1.20.4"
-fabric-loom = "1.5.7"
-fabric-api = "0.96.0+1.20.4"
-fabric-loader = "0.15.6"
+paper-api = "1.20.6-R0.1-SNAPSHOT"
+minecraft = "1.20.6"
+fabric-loom = "1.6.9"
+fabric-api = "0.99.0+1.20.6"
+fabric-loader = "0.15.11"
 sponge-api = "11.0.0-SNAPSHOT"
-minestom-api = "82725b5e32"
-checker = "0.6.37"
+minestom-api = "1_20_5-fe4400bc3e"
+checker = "0.6.39"
 
 [libraries]
 junit-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit" }

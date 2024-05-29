@@ -7,7 +7,7 @@ plugins {
 
 allprojects {
     group = "me.moros"
-    version = "1.1.0"
+    version = "1.2.0"
 
     apply(plugin = "java-library")
     apply(plugin = "org.checkerframework")
@@ -17,7 +17,7 @@ allprojects {
     }
 
     configure<JavaPluginExtension> {
-        toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+        toolchain.languageVersion.set(JavaLanguageVersion.of(21))
     }
 
     tasks {
@@ -30,8 +30,8 @@ allprojects {
             isReproducibleFileOrder = true
         }
         named<Copy>("processResources") {
-            from("$rootDir/LICENSE") {
-                rename { "${rootProject.name.uppercase()}_${it}" }
+            from(rootProject.file("LICENSE")) {
+                rename { "META-INF/${it}_${rootProject.name.uppercase()}" }
             }
         }
     }
