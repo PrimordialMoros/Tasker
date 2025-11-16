@@ -1,5 +1,5 @@
 /*
- * Copyright 2021-2024 Moros
+ * Copyright 2021-2025 Moros
  *
  * This file is part of Tasker.
  *
@@ -22,11 +22,11 @@ package me.moros.tasker;
 import java.util.function.Consumer;
 
 import me.moros.tasker.TaskList.PendingTaskList;
-import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jspecify.annotations.Nullable;
 
 sealed class TaskList permits PendingTaskList {
-  private Expiring first;
-  private Expiring last;
+  private @Nullable Expiring first;
+  private @Nullable Expiring last;
 
   TaskList() {
   }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2021-2024 Moros
+ * Copyright 2021-2025 Moros
  *
  * This file is part of Tasker.
  *
@@ -21,7 +21,7 @@ package me.moros.tasker;
 
 import java.util.Comparator;
 
-import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Abstract base for {@link Task}.
@@ -29,10 +29,10 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 public abstract class Expiring implements Task, Comparable<Expiring> {
   private static final Comparator<Expiring> COMPARATOR = Comparator.comparingInt(Expiring::expiringTick);
 
-  private Expiring prev;
-  private Expiring next;
+  private @Nullable Expiring prev;
+  private @Nullable Expiring next;
 
-  TaskList parent;
+  @Nullable TaskList parent;
   int expiringTick;
 
   protected Expiring() {

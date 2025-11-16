@@ -1,5 +1,5 @@
 /*
- * Copyright 2021-2024 Moros
+ * Copyright 2021-2025 Moros
  *
  * This file is part of Tasker.
  *
@@ -26,7 +26,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 
 import me.moros.tasker.Task;
-import org.checkerframework.checker.nullness.qual.PolyNull;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Represents a task executor.
@@ -52,7 +52,7 @@ public interface TaskExecutor extends TickAdapter, Executor {
    * @param <V> the type of result the task returns
    * @return the scheduled task as a future
    */
-  default <V> CompletableFuture<@PolyNull V> submit(Supplier<@PolyNull V> task) {
+  default <V> CompletableFuture<@Nullable V> submit(Supplier<@Nullable V> task) {
     return submit(task, 0);
   }
 
@@ -73,7 +73,7 @@ public interface TaskExecutor extends TickAdapter, Executor {
    * @param <V> the type of result the task returns
    * @return the scheduled task as a future
    */
-  <V> CompletableFuture<@PolyNull V> submit(Supplier<@PolyNull V> task, int ticks);
+  <V> CompletableFuture<@Nullable V> submit(Supplier<@Nullable V> task, int ticks);
 
   /**
    * Submit a task.
@@ -94,7 +94,7 @@ public interface TaskExecutor extends TickAdapter, Executor {
    * @param <V> the type of result the task returns
    * @return the scheduled task as a future
    */
-  <V> CompletableFuture<@PolyNull V> submit(Supplier<@PolyNull V> task, long delay, TimeUnit unit);
+  <V> CompletableFuture<@Nullable V> submit(Supplier<@Nullable V> task, long delay, TimeUnit unit);
 
   /**
    * Schedule a repeating task.

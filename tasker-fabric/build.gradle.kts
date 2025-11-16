@@ -7,7 +7,7 @@ repositories {
 }
 
 dependencies {
-    api(project(":tasker-core"))
+    api(projects.taskerCore)
     minecraft(libs.fabric.minecraft)
     mappings(loom.officialMojangMappings())
     modCompileOnly(libs.fabric.api)

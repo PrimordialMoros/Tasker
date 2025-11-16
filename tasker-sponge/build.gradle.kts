@@ -3,6 +3,6 @@ repositories {
 }
 
 dependencies {
-    api(project(":tasker-core"))
+    api(projects.taskerCore)
     compileOnly(libs.sponge.api)
 }

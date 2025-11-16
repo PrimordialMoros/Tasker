@@ -1,5 +1,5 @@
 /*
- * Copyright 2021-2024 Moros
+ * Copyright 2021-2025 Moros
  *
  * This file is part of Tasker.
  *
@@ -27,7 +27,7 @@ import java.util.function.Supplier;
 
 import me.moros.tasker.Task;
 import me.moros.tasker.TimerWheel;
-import org.checkerframework.checker.nullness.qual.PolyNull;
+import org.jspecify.annotations.Nullable;
 
 /**
  * An abstract sync executor utilizing that delegates to a {@link TimerWheel}.
@@ -44,7 +44,7 @@ public abstract class AbstractSyncExecutor implements SyncExecutor {
   }
 
   @Override
-  public <V> CompletableFuture<@PolyNull V> submit(Supplier<@PolyNull V> task, int ticks) {
+  public <V> CompletableFuture<@Nullable V> submit(Supplier<@Nullable V> task, int ticks) {
     Objects.requireNonNull(task);
     checkValid();
     CompletableFuture<V> future = new CompletableFuture<>();
@@ -75,7 +75,7 @@ public abstract class AbstractSyncExecutor implements SyncExecutor {
     }
   }
 
-  private static <V> Consumer<? super Task> bind(Supplier<@PolyNull V> task, CompletableFuture<@PolyNull V> future) {
+  private static <V> Consumer<? super Task> bind(Supplier<@Nullable V> task, CompletableFuture<@Nullable V> future) {
     return t -> {
       try {
         future.complete(task.get());

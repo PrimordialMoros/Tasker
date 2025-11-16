@@ -1,3 +1,5 @@
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 pluginManagement {
     repositories {
         gradlePluginPortal()
@@ -6,8 +8,8 @@ pluginManagement {
 }
 
 rootProject.name = "tasker"
+
 include("tasker-core")
-include("tasker-bukkit")
 include("tasker-paper")
 include("tasker-sponge")
 include("tasker-fabric")

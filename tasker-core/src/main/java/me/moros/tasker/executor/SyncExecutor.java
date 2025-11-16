@@ -1,5 +1,5 @@
 /*
- * Copyright 2021-2024 Moros
+ * Copyright 2021-2025 Moros
  *
  * This file is part of Tasker.
  *
@@ -26,14 +26,14 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 import me.moros.tasker.Task;
-import org.checkerframework.checker.nullness.qual.PolyNull;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Represents a sync task executor.
  */
 public interface SyncExecutor extends TaskExecutor {
   @Override
-  default <V> CompletableFuture<@PolyNull V> submit(Supplier<@PolyNull V> task, long delay, TimeUnit unit) {
+  default <V> CompletableFuture<@Nullable V> submit(Supplier<@Nullable V> task, long delay, TimeUnit unit) {
     return submit(task, toTicks(delay, unit));
   }
 

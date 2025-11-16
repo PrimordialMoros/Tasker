@@ -1,5 +1,5 @@
 /*
- * Copyright 2021-2024 Moros
+ * Copyright 2021-2025 Moros
  *
  * This file is part of Tasker.
  *
@@ -33,7 +33,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 
 import me.moros.tasker.Task;
-import org.checkerframework.checker.nullness.qual.PolyNull;
+import org.jspecify.annotations.Nullable;
 
 /**
  * A simple async executor implementation that delegates to a {@link ScheduledExecutorService} for repeated tasks.
@@ -44,7 +44,8 @@ public class SimpleAsyncExecutor implements AsyncExecutor {
 
   public SimpleAsyncExecutor(ExecutorService executor) {
     var threadFactory = new DaemonThreadFactory("TaskerScheduler");
-    (this.scheduler = new ScheduledThreadPoolExecutor(1, threadFactory)).setRemoveOnCancelPolicy(true);
+    this.scheduler = new ScheduledThreadPoolExecutor(1, threadFactory);
+    this.scheduler.setRemoveOnCancelPolicy(true);
     this.executor = Objects.requireNonNull(executor);
   }
 
@@ -57,7 +58,7 @@ public class SimpleAsyncExecutor implements AsyncExecutor {
   }
 
   @Override
-  public <V> CompletableFuture<@PolyNull V> submit(Supplier<@PolyNull V> task, long delay, TimeUnit unit) {
+  public <V> CompletableFuture<@Nullable V> submit(Supplier<@Nullable V> task, long delay, TimeUnit unit) {
     Objects.requireNonNull(task);
     checkValid();
     return CompletableFuture.supplyAsync(task, delayedExecutor(delay, unit));
